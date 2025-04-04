@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>frontend</title>
+  <style>
+    /* 字体相关 */
+    body, h1, h2, h3, h4, h5, h6 { font-family: "Lato", sans-serif; }
+    h1, button { font-family: "Montserrat", sans-serif; }
+
+    /* 公共 icon 样式 */
+    .fa-anchor, .fa-coffee { font-size: 200px; }
+    footer i { font-size: 50px; padding: 20px; }
+
+    /* Navbar 样式 */
+    .w3-top { position: relative; width: 100%; }
+    .w3-bar {
+      overflow: hidden;
+      background-color: #ffeb3b;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      /* text-align: left;  */
+      display: flex; 
+      justify-content: space-around; 
+    }
+    .w3-bar a, .w3-bar button {
+      display: inline-block;
+      color: black;
+      /* text-align: center; */
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      flex-grow: 1;
+    }
+    .w3-bar a:hover,
+    .w3-bar button:hover { background-color: white; }
+    .w3-card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .w3-yellow { background-color: #ffeb3b; }
+    .w3-white { background-color: white; }
+    .w3-red { background-color: red; color: white; }
+    /* 隐藏中、大屏幕下不需要显示的元素 */
+    .w3-hide-medium, .w3-hide-large { display: none; }
+    /* Navbar 小屏幕下 */
+    .w3-bar-block {
+      display: none;
+      background-color: white;
+    }
+    .w3-bar-block a {
+      display: block;
+      padding: 14px 16px;
+      border-top: 1px solid #ddd;
+    }
+    .w3-show { display: block !important; }
+
+    /* Header 样式 */
+    header.w3-container {
+      text-align: center;
+      background-color: #ffeb3b;
+      padding: 128px 16px;
+    }
+    .w3-jumbo { font-size: 64px; }
+    .w3-xlarge { font-size: 24px; }
+    .w3-button { cursor: pointer; }
+    .w3-black { background-color: #000; color: #fff; }
+    .w3-padding-large { padding: 12px 16px; }
+    .w3-margin-top { margin-top: 16px; }
+    .w3-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+    }
+    /* Grid 布局 */
+    .w3-row-padding { margin: 0 -16px; }
+    .w3-container { padding: 0.01em 16px; }
+    .w3-content { max-width: 1200px; margin: auto; overflow: hidden; }
+    .w3-twothird { float: left; width: 66.66%; }
+    .w3-third { float: left; width: 33.33%; }
+    .w3-padding-64 { padding: 64px 0; }
+    .w3-padding-32 { padding: 32px 0; }
+    .w3-text-grey { color: grey; }
+    .w3-light-grey { background-color: #f4f4f4; }
+    /* Footer 样式 */
+    footer.w3-container {
+      text-align: center;
+      padding: 80px 16px;
+      background-color: #4f4d4d;
+      color: #fff;
+      opacity: 0.8;
+    }
+    footer a {
+      font-size: 30px;
+      text-decoration: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* 清除浮动 */
+    .w3-clear::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-yellow w3-card">
+    <button class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right" 
+      onclick="myFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </button>
+    <a href="./home.html" class="w3-bar-item w3-button w3-white" target="_blank">学习路线</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small">数据结构</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small">计算机网络</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small">计算机组成原理</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small">操作系统</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small">其它</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small"></a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small"></a>
+  </div>
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white">
+    <a href="#" class="w3-bar-item">Link 1</a>
+    <a href="#" class="w3-bar-item">Link 2</a>
+    <a href="#" class="w3-bar-item">Link 3</a>
+    <a href="#" class="w3-bar-item">Link 4</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-yellow w3-center">
+  <h1 class="w3-margin w3-jumbo">前端学习之旅</h1>
+  <p class="w3-xlarge">初学者路线</p>
+  <button class="w3-button w3-black w3-padding-large w3-margin-top" style="font-size:24px; padding:20px 40px;">
+    <a href="./home.html" target="_blank" style="text-decoration: none; color: inherit; border-radius: 5px;">现在开始</a>
+  </button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container w3-clear">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1>Lorem Ipsum</h1>
+      <h5 class="w3-padding-32">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </h5>
+      <p class="w3-text-grey">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, 
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div>
+    <div class="w3-third w3-center">
+      <i class="fa fa-anchor" style="padding:64px;" class="w3-text-red"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container w3-clear">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+      <i class="fa fa-coffee" style="padding:64px; margin-right:20px;" class="w3-text-red"></i>
+    </div>
+    <div class="w3-twothird">
+      <h1>Lorem Ipsum</h1>
+      <h5 class="w3-padding-32">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </h5>
+      <p class="w3-text-grey">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, 
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Quote -->
+<div class="w3-container w3-black w3-center" style="opacity:0.8; padding:64px;">
+  <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-164 w3-center" style="opacity:0.8;">
+  <!-- 如有需要，可启用图标栏 -->
+  <!--
+  <div class="w3-xlarge" style="padding:32px;">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  -->
+  <p>Made by <a href="https://github.com/MU-ty" target="_blank" style="font-size:30px; text-decoration: none;">
+    <i class="fa fa-github w3-hover-opacity"></i>Mu-ty831</a>
+  </p>
+</footer>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else { 
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+</script>
+</body>
+</html>

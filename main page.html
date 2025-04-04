@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Document</title>
+  <style>
+    /* 导航部分 */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      /* overflow: hidden; */
+      background-color: #f0de40;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;  
+      justify-content: space-around; 
+      text-align: center;
+    }
+
+    .header a {
+      display: inline-block;
+      color: black;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      flex-grow: 1;
+    }
+
+    .header a:hover {
+      background-color: white;  
+    }
+    
+    .active-nav {
+      background-color: #ffec3d;
+    }
+    
+    .dropdown{
+      position: relative;
+      display: flex;
+      flex-grow: 1;
+    }
+    .dropdown >a{
+      width: 100%;
+      text-align: center;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #cecece;
+      min-width: 227px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 999;
+      top: 100%;
+    }
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {background-color: #ddd;}
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* 第一header */
+    header {
+      text-align: center;
+      background-color: #f4e663;
+      padding: 128px 16px;
+      font-size: 35px;
+    }
+    header p {
+      font-size: 24px;
+    }
+    .start-button {
+      display: inline-block;
+      background-color: #ff4d4f;
+      color: white;
+      padding: 15px 30px;
+      font-size: 22px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    
+    .start-button:hover {
+      background-color: #ff7875;
+    }
+    /* title */
+    .title {
+      text-align: center;
+      font-size: 32px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      background-color: #ffef86;
+    }
+    /* 主体 */
+    .main1 {
+      display: grid;
+      gap: 5px 0px;
+      padding: 20px;
+      margin: 0px;
+      background-color: #ffef86;
+      grid-template-columns: 580px auto;
+      grid-template-rows: 460px; 
+      text-align: center;
+    }
+    
+    .main1>div {
+      padding: 20px;
+      background-color: #ffffff;
+      /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+    }
+    
+    /* 示例按钮样式 */
+    .example-button {
+      padding: 10px 20px;
+      background-color: #ff8e4d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    /* 代码输入容器 */
+    .code-input-container {
+      position: relative;
+      width: 90%;
+      margin: 0 auto;
+    }
+    
+    /* HTML代码输入框 */
+    #html-code {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 10px;
+      font-family: monospace;
+      resize: none;
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    
+    /* 预览按钮 */
+    .preview-button {
+      padding: 5px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    
+    /* 预览模态框 */
+    #preview-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      overflow: auto;
+    }
+    
+    /* 模态框内容 */
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 1200px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    
+    /* 关闭按钮 */
+    .close-button {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+    
+    /* 模态框标题 */
+    .modal-title {
+      margin-top: 0;
+      font-size: 20px;
+    }
+    
+    /* 预览区域 */
+    #preview {
+      width: 100%;
+      height: 550px;
+      border: 1px solid #ccc;
+      background-color: #ce921161;
+    }
+
+    .main2 {
+      display: grid;
+      gap: 5px 0px;
+      padding: 20px;
+      margin: 0px;
+      background-color: #ffef86;
+      grid-template-columns: 1200px auto;
+      grid-template-rows: 460px; 
+      text-align: center;
+    }
+    .main2>div {
+      padding: 20px;
+      background-color: #9f9f9f;
+      /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+    }
+
+    .footer {
+      text-align: center;
+      background-color: #f4e663;
+      padding: 20px;
+    }
+
+    /* 学习路径卡片样式 */
+  .learning-path-cards {
+    background-color: #f4f4f4;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .learning-path-cards h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .learning-path-cards p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .path-card {
+    width: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+  }
+
+  .path-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+  }
+
+  .card-header {
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .basic .card-header {
+    background-color: #4285f4;
+  }
+
+  .intermediate .card-header {
+    background-color: #34a853;
+  }
+
+  .advanced .card-header {
+    background-color: #ea4335;
+  }
+
+  .card-content {
+    padding: 20px;
+    min-height: 150px;
+  }
+
+  .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .tag {
+    padding: 5px 10px;
+    background-color: #e8f0fe;
+    color: #4285f4;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+
+  .card-button {
+    display: block;
+    padding: 12px 0;
+    background-color: #4285f4;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    /* transition: background-color 0.3s; */
+  }
+
+  .card-button:hover {
+    background-color: #3367d6;
+  }
+
+
+  /* 滚动提示卡片样式 */
+  .scroll-tips-container {
+    padding: 30px 0;
+    background-color: #fff8db;
+    text-align: center;
+  }
+
+  .scroll-tips-container h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 10px 0;
+  }
+
+  .marquee-content {
+    display: inline-flex;
+    gap: 20px;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
+  }
+
+  .tip-card {
+    display: inline-block;
+    min-width: 250px;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    animation-play-state: paused;
+    cursor: pointer;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 8 - 20px * 8));
+    }
+  }
+
+  /* 当鼠标悬停在容器上时暂停动画 */
+  .marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+  }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <div class="header">
+    <div class="dropdown">
+      <a href="#" class="active-nav">
+        学习方向
+      </a>
+      <div class="dropdown-content">
+        <a href="./home.html" target="_blank">前端</a>
+        <a href="#">后端</a>
+        <a href="#">qqq</a>
+      </div>
+    </div>
+    <a href="#" class="">数据结构</a>
+    <a href="#" class="">计算机网络</a>
+    <a href="#" class="">计算机组成原理</a>
+    <a href="#" class="">操作系统</a>
+    <a href="#" class="">其它内容</a>
+    <a href="#" class="">个人中心</a>
+  </div>
+  <!-- 头部及按钮 -->
+  <header>
+    <h1>CS学习之旅</h1>
+    <p>✨初学者路线✨</p>
+    <a href="./路线.html" class="start-button" target="_blank">查看路线</a>
+  </header>
+
+  <!-- 添加学习路径卡片部分 -->
+  <div class="learning-path-cards">
+    <h2>学习路径指南</h2>
+    <p>按照科学的学习路径，循序渐进地掌握计算机科学知识</p>
+    
+    <div class="card-container">
+      <!-- 编程基础卡片 -->
+      <div class="path-card basic">
+        <div class="card-header">编程基础</div>
+        <div class="card-content">
+          <p>掌握一门入门编程语言，建立编程思维和基础算法能力</p>
+          <div class="tag-container">
+            <span class="tag">Python</span>
+            <span class="tag">C++</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">基础算法</span>
+          </div>
+        </div>
+        <a href="#" class="card-button">开始学习</a>
+      </div>
+      
+      <!-- 数据结构卡片 -->
+      <div class="path-card intermediate">
+        <div class="card-header">🚀数据结构与算法🚀</div>
+        <div class="card-content">
+          <p>学习常见数据结构和算法，提高编程能力和解决问题的效率</p>
+          <div class="tag-container">
+            <span class="tag">数组与链表</span>
+            <span class="tag">排序算法</span>
+            <span class="tag">树与图</span>
+            <span class="tag">分治</span>
+            <span class="tag">回溯</span>
+
+          </div>
+        </div>
+        <a href="#" class="card-button">开始学习</a>
+      </div>
+      
+      <!-- 计算机系统卡片 -->
+      <div class="path-card advanced">
+        <div class="card-header">计算机系统</div>
+        <div class="card-content">
+          <p>了解操作系统、计算机网络和计算机组成原理的核心概念</p>
+          <div class="tag-container">
+            <span class="tag">操作系统</span>
+            <span class="tag">计算机网络</span>
+            <span class="tag">计算机组成</span>
+          </div>
+        </div>
+        <a href="#" class="card-button">开始学习</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自动滚动学习提示卡片 -->
+  <div class="scroll-tips-container">
+    <h3>学习提示与建议</h3>
+    <div class="marquee-container">
+      <div class="marquee-content">
+        <div class="tip-card">📚 每天解决一个编程问题</div>
+        <div class="tip-card">💻 尝试阅读开源项目代码</div>
+        <div class="tip-card">🔍 动手实现一个数据结构</div>
+        <div class="tip-card">📝 记录学习笔记和心得</div>
+        <div class="tip-card">👥 加入编程社区交流</div>
+        <div class="tip-card">🛠️ 参与开源项目贡献</div>
+        <div class="tip-card">📊 复习计算机网络知识</div>
+        <div class="tip-card">🔒 了解基本网络安全</div>
+        <div class="tip-card">📚 每天解决一个编程问题</div>
+        <div class="tip-card">💻 尝试阅读开源项目代码</div>
+        <div class="tip-card">🔍 动手实现一个数据结构</div>
+        <div class="tip-card">📝 记录学习笔记和心得</div>
+        <div class="tip-card">👥 加入编程社区交流</div>
+        <div class="tip-card">🛠️ 参与开源项目贡献</div>
+        <div class="tip-card">📊 复习计算机网络知识</div>
+        <div class="tip-card">🔒 了解基本网络安全</div>
+        <div class="tip-card">📚 每天解决一个编程问题</div>
+        <div class="tip-card">💻 尝试阅读开源项目代码</div>
+        <div class="tip-card">🔍 动手实现一个数据结构</div>
+        <div class="tip-card">📝 记录学习笔记和心得</div>
+        <div class="tip-card">👥 加入编程社区交流</div>
+        <div class="tip-card">🛠️ 参与开源项目贡献</div>
+        <div class="tip-card">📊 复习计算机网络知识</div>
+        <div class="tip-card">🔒 了解基本网络安全</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主体 -->
+   <h1 class="title">学习的便利条件</h1>
+  <div class="main1">
+    <div>
+      <h2>可视化结果</h2>
+      <p>不需要下载编译器，节约存储空间，操作方便，随时查看效果，学习更便利，便于更改与优化（仅适用与HTML、css、JavaScript）</p>
+
+      <!-- 添加例子按钮 -->
+      <button onclick="loadExample()" class="example-button">
+        加载代码示例
+      </button>
+    </div>
+
+    <div>
+      <h2>实时代码预览</h2>
+      <div class="code-input-container">
+        <textarea id="html-code" placeholder="你可以输入 HTML 代码，如果你只想看效果，可以点击左侧加载代码示例按钮，然后点击预览按钮即可查看"></textarea>
+        <button onclick="updatePreview()" class="preview-button">预览</button>
+      </div>
+      
+      <!-- 弹窗预览区域 -->
+      <div id="preview-modal">
+        <div class="modal-content">
+          <span onclick="closePreview()" class="close-button">&times;</span>
+          <h3 class="modal-title">HTML 预览结果</h3>
+          <div id="preview"></div>
+        </div>
+      </div>
+          
+      <script>
+        function updatePreview() {
+          const htmlCode = document.getElementById('html-code').value;
+          const previewElement = document.getElementById('preview');
+          const previewModal = document.getElementById('preview-modal');
+          
+          // 显示弹窗
+          previewModal.style.display = 'block';
+          
+          const iframe = document.createElement('iframe');
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = 'none';
+          
+          previewElement.innerHTML = '';
+          previewElement.appendChild(iframe);
+          
+          const iframeDoc = iframe.contentWindow.document;
+          iframeDoc.open();
+          iframeDoc.write(`
+            <html>
+              <body>${htmlCode}</body>
+            </html>
+          `);
+          iframeDoc.close();
+        }
+        
+        function closePreview() {
+          document.getElementById('preview-modal').style.display = 'none';
+        }
+        
+        // 添加新函数加载示例代码
+        function loadExample() {
+          const exampleCode = `<!DOCTYPE html>
+      <html>
+      <head>
+        <title>我的第一个HTML页面</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+          }
+          h1 {
+            color: #4285f4;
+            text-align: center;
+          }
+          .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          }
+          .btn {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          .btn:hover {
+            background-color: #3367d6;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>欢迎学习HTML!</h1>
+          <p>这是一个简单的HTML示例，包含了基本的结构和样式。</p>
+          <button class="btn">点击我</button>
+        </div>
+      </body>
+      </html>`;
+
+          document.getElementById('html-code').value = exampleCode;
+        }
+        
+        // 点击弹窗外部区域关闭
+        window.onclick = function(event) {
+          const modal = document.getElementById('preview-modal');
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        }
+      </script>
+    </div>
+  </div>
+  <div class="main2">
+    <div>
+      <h2>练习</h2>
+      <img src="练习.gif" alt="练习演示动画" style="width:600px; max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+    </div>
+    <div>
+      <h2>练习与巩固</h2>
+      <p>每学完一小节，课后都有练习题</p>
+      
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2025 CS学习之旅</p>
+    <p>Made by <a href="https://github.com/MU-ty" target="_blank" style="font-size:30px; text-decoration: none;">
+      <i class="fa fa-github w3-hover-opacity"></i>Mu-ty831</a>
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时预览 HTML 和 CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea{
+            display: none; /* 隐藏CSS输入框 */
+        }
+        #preview {
+            width: 80%;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>实时编辑和预览 HTML 和 CSS</h1>
+
+    <div>
+        <textarea id="html-code" placeholder="输入 HTML 代码">   
+        <!DOCTYPE html>
+        <html lang="zh">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>带侧边栏的布局</title>
+        </head>
+        <body>
+
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <h2>样式表</h2>
+                <a href="#">样式表 1</a>
+                <a href="#">样式表 2</a>
+                <a href="#">样式表 3</a>
+                <a href="#">样式表 4</a>
+                <a href="#">无样式表</a>
+            </div>
+
+            <!-- 主内容 -->
+            <div class="main-content">
+                <h1>同一页面不同的样式表</h1>
+                <p>
+                    这是不同样式表如何更改 HTML 页面的布局。您可以通过在菜单中选择不同的样式表来选择该页面的布局。
+                </p>
+                <h2>无样式</h2>
+                <p>
+                    此页面使用 DIV 元素对 HTML 页面不同部分进行分组。单击此处查看没有样式表的页面外观：
+                </p>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="right-sidebar">
+                <h2>侧边栏</h2>
+                <p>这里是右侧的内容区，你可以放一些额外的说明或链接。</p>
+            </div>
+
+        </body>
+        </html>
+        </textarea>
+    </div>
+    <div>
+        <textarea id="css-code" placeholder="输入 CSS 代码">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 250px;
+            background-color: #00b4d8;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            background-color: #48c6ef;
+            padding: 5px;
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            flex-grow: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            background-color: #00b4d8;
+            color: white;
+            padding: 10px;
+            margin-top: 0;
+        }
+
+        .main-content p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* 右侧边栏样式 */
+        .right-sidebar {
+            width: 300px;
+            background-color: #e0f7fa;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        </textarea>
+    </div>
+
+    <!---<button onclick="updatePreview()">更新预览</button>--->
+
+    <div id="preview"></div>
+
+    <script>
+        function updatePreview() {
+            const htmlCode = document.getElementById('html-code').value;
+            const cssCode = document.getElementById('css-code').value;
+
+            const iframe = document.createElement('iframe');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            document.getElementById('preview').innerHTML = '';
+            document.getElementById('preview').appendChild(iframe);
+
+            const iframeDoc = iframe.contentWindow.document;
+            iframeDoc.open();
+            iframeDoc.write(`
+                <html>
+                    <head>
+                        <style>${cssCode}</style>
+                    </head>
+                    <body>${htmlCode}</body>
+                </html>
+            `);
+            iframeDoc.close();
+        }
+
+        // 自动加载默认代码并预览
+        window.onload = function() {
+            updatePreview();
+        };
+    </script>
+
+</body>
+</html>
+
+
+
+
+case 'css':
+          middlePanel.innerHTML = '<h2>CSS 介绍</h2><p>CSS是用于设计HTML文档样式的语言，它描述了元素应该如何显示。</p><h2>效果展示</h2>';
+          break;
+
+
+
+
+          case 'css':
+          middlePanel.innerHTML = '<h2>CSS 介绍</h2><p>CSS是用于设计HTML文档样式的语言，它描述了元素应该如何显示。</p><h2>效果展示</h2>';
+    
+          // 获取 middlePanel
+          const middlePanel = document.getElementById('middlePanel');
+    
+          // 创建实时预览容器
+          const previewContainer = document.createElement('div');
+          previewContainer.innerHTML = `
+          <h1>实时编辑和预览 HTML 和 CSS</h1>
+          
+          <!-- 隐藏的 HTML 和 CSS 输入框 -->
+          <textarea id="html-code" placeholder="输入 HTML 代码">   
+          <!DOCTYPE html>
+          <html lang="zh">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>带侧边栏的布局</title>
+          </head>
+          <body>
+              <!-- 侧边栏 -->
+              <div class="sidebar">
+                  <h2>样式表</h2>
+                  <a href="#">样式表 1</a>
+                  <a href="#">样式表 2</a>
+                  <a href="#">样式表 3</a>
+                  <a href="#">样式表 4</a>
+                  <a href="#">无样式表</a>
+              </div>
+
+              <!-- 主内容 -->
+              <div class="main-content">
+                  <h1>同一页面不同的样式表</h1>
+                  <p>
+                      这是不同样式表如何更改 HTML 页面的布局。您可以通过在菜单中选择不同的样式表来选择该页面的布局。
+                  </p>
+                  <h2>无样式</h2>
+                  <p>
+                      此页面使用 DIV 元素对 HTML 页面不同部分进行分组。单击此处查看没有样式表的页面外观：
+                  </p>
+              </div>
+
+              <!-- 右侧边栏 -->
+              <div class="right-sidebar">
+                  <h2>侧边栏</h2>
+                  <p>这里是右侧的内容区，你可以放一些额外的说明或链接。</p>
+              </div>
+          </body>
+          </html>
+          </textarea>
+
+          <textarea id="css-code" placeholder="输入 CSS 代码">
+          body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              display: flex;
+              background-color: #f4f4f4;
+          }
+
+          /* 侧边栏样式 */
+          .sidebar {
+              width: 250px;
+              background-color: #00b4d8;
+              color: white;
+              padding: 20px;
+              height: 100vh;
+          }
+
+          .sidebar a {
+              color: white;
+              text-decoration: none;
+              display: block;
+              margin-bottom: 10px;
+          }
+
+          .sidebar a:hover {
+              background-color: #48c6ef;
+              padding: 5px;
+          }
+
+          /* 主内容区域 */
+          .main-content {
+              flex-grow: 1;
+              background-color: #ffffff;
+              padding: 20px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          .main-content h1 {
+              background-color: #00b4d8;
+              color: white;
+              padding: 10px;
+              margin-top: 0;
+          }
+
+          .main-content p {
+              font-size: 16px;
+              line-height: 1.6;
+          }
+
+          /* 右侧边栏样式 */
+          .right-sidebar {
+              width: 300px;
+              background-color: #e0f7fa;
+              padding: 20px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+          </textarea>
+
+          <!-- 预览区域 -->
+          <div id="preview"></div>
+
+          <script>
+              function updatePreview() {
+                  const htmlCode = document.getElementById('html-code').value;
+                  const cssCode = document.getElementById('css-code').value;
+
+                  const iframe = document.createElement('iframe');
+                  iframe.style.width = '100%';
+                  iframe.style.height = '100%';
+                  document.getElementById('preview').innerHTML = '';
+                  document.getElementById('preview').appendChild(iframe);
+
+                  const iframeDoc = iframe.contentWindow.document;
+                  iframeDoc.open();
+                  iframeDoc.write(\`
+                  <html>
+                    <head>
+                      <style>\${cssCode}</style>
+                    </head>
+                    <body>\${htmlCode}</body>
+                  </html>
+                \`);
+                iframeDoc.close();
+              }
+
+              // 自动加载默认代码并预览
+              window.onload = function() {
+                updatePreview();
+              };
+            <\/script>
+          `;
+          
+          // 将实时预览部分插入到中间面板
+          middlePanel.appendChild(previewContainer);
+          break;
+
+
+          case 'css':
+          middlePanel.innerHTML = '<h2>CSS 介绍</h2><p>CSS是用于设计HTML文档样式的语言，它描述了元素应该如何显示。</p><h2>效果展示</h2>';
+          break;

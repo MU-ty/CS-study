@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>交互式流程图</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      height: 120vh;
+      background-color: #f4f4f4;
+    }
+
+    .left-panel {
+      font-family: "Audiowide", sans-serif;
+      width: 250px;
+      padding: 20px;
+      background: linear-gradient(to right, #00b4d8, #c4e1ea);
+      color: rgb(157, 146, 146);
+      border-radius: 10px;
+      margin: 20px;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-panel .node {
+      background-color: #FFDB58;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: #ffffff 0px 0px 10px;
+    }
+
+    .left-panel .node:hover {
+      transform: scale(1.05);
+      background-color: #FFCA42;
+    }
+
+    .left-panel .node-content {
+      font-weight: bold;
+    }
+
+    .left-panel .node:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    .left-panel .node:not(:last-child)::after {
+      content: '↓';
+      font-size: 30px;
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .middle-panel {
+      flex-grow: 1;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    }
+
+    .row {
+      padding: 20px 40px;
+      margin: 10px 50px 0px 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      gap: 150px;
+    }
+    .row .column{
+      width: 28%;
+      padding: 20px 30px 10px 30px;
+      border-radius: 10px;
+      border: 2px solid aquamarine;
+      box-shadow: 0 100px 200px rgba(37, 39, 107, 0.1);
+      text-align: center;
+    }
+
+    .column h2 {
+      font-size: 24px;
+      color: aquamarine;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      border-radius: 4px;
+      background-color: #153abe;
+      border: none;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 28px;
+      padding: 20px;
+      width: 200px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .button span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+    .button span:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
+    .button:hover span {
+      padding-right: 25px;
+    }
+    .button:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+    #chart {
+      width: 500px;
+      height: 400px;
+      outline: solid red 1px;
+      margin: 20px auto;
+    }
+    a{
+      text-decoration: none;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="left-panel">
+    <div class="node" onclick="showDetails('html')">
+      <div class="node-content">HTML</div>
+    </div>
+    <div class="node" onclick="showDetails('css')">
+      <div class="node-content">CSS</div>
+    </div>
+    <div class="node" onclick="showDetails('javascript')">
+      <div class="node-content">JavaScript</div>
+    </div>
+    <!-- 替换原来的 Git 和 GitHub 节点为一个整体 -->
+    <div class="node" onclick="toggleGit()">
+      <div class="node-content">Git / GitHub</div>
+    </div>
+    <div class="node" onclick="showDetails('npm')">
+      <div class="node-content">npm</div>
+    </div>
+    <div class="node" onclick="showDetails('react')">
+      <div class="node-content">React</div>
+    </div>
+    <div class="node" onclick="showDetails('tailwind')">
+      <div class="node-content">Tailwind</div>
+    </div>
+    <div class="node" onclick="showDetails('tailwind')">
+      <div class="node-content">Vitest</div>
+    </div>
+    <div class="node" onclick="showDetails('tailwind')">
+      <div class="node-content">专业者路线（更多）</div>
+    </div>
+  </div>
+
+  <div class="middle-panel" id="middle-panel">
+    <h1 style="text-align: center; color:aquamarine;">前端学习建议</h1>
+    <div class="row">
+      <div class="column">
+        <h2><i class="fa fa-html5" style="margin-right: 10px;color: #000;" ></i>HTML</h2>
+        <p style="font-size: 20px;">HTML是网页的标准标记语言。用它来构建你自己网站的内容。</p>
+        <button class="button" style="vertical-align:middle"><span>现在开始 </span></button>
+      </div>
+      
+      <div class="column">
+        <h2><i class="fa fa-css3" style="margin-right: 10px; color: #000;"></i>CSS</h2>
+        <p style="font-size: 20px;">CSS是用于设计HTML文档样式的语言，它描述了元素应该如何显示。</p>
+        <button class="button" style="vertical-align:middle"><span>现在开始 </span></button>
+      </div>
+      
+      <div class="column">
+        <h2><i class="fa fa-jsfiddle" style="margin-right: 10px;color: #000;"></i>JavaScript</h2>
+        <p style="font-size: 20px;">JavaScript是一种编程语言，用于使内容动态，控制多媒体和使元素移动。</p>
+        <button class="button" style="vertical-align:middle"><span>现在开始 </span></button>
+      </div>
+    </div>
+    <h1 style="text-align: center; color:aquamarine;">开源项目VisActor</h1>
+    <h2 style="font-size: 20px; text-align: center;">
+      VisActor是一个基于Javascript的开源项目，它提供了一种新的方式来创建交互式的数据可视化和故事。
+    </h2>
+    <div id="chart"></div>
+  </div>
+
+
+  <script>
+    // 全局定义 updatePreview 函数
+    function updatePreview() {
+    const htmlCode = document.getElementById('html-code').value;
+    const cssCode = document.getElementById('css-code').value;
+
+    const iframe = document.createElement('iframe');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    const previewContainer = document.getElementById('preview');
+    previewContainer.innerHTML = '';
+    previewContainer.appendChild(iframe);
+
+    const iframeDoc = iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(`
+      <html>
+        <head>
+          <style>${cssCode}</style>
+        </head>
+        <body>${htmlCode}</body>
+      </html>
+    `);
+    iframeDoc.close();
+  }
+    // 更新中间面板的内容
+    function showDetails(topic) {
+      const middlePanel = document.getElementById('middle-panel');
+      
+      switch(topic) {
+        case 'html':
+          middlePanel.innerHTML = '<h2>HTML 介绍</h2><p>HTML是网页的基础结构...</p>';
+          break;
+        case 'css':
+          // 在这里插入你的实时编辑和预览代码
+          middlePanel.innerHTML = `
+          <h2>CSS 介绍</h2>
+          <p>CSS是用于设计HTML文档样式的语言，它描述了元素应该如何显示。</p>  
+          <h2>效果展示</h2>
+              <!-- 插入实时编辑和预览部分 -->
+
+              <div style="display:none;">
+                  <textarea id="html-code" placeholder="输入 HTML 代码">   
+                  <!DOCTYPE html>
+                  <html lang="zh">
+                  <head>
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                      <title>带侧边栏的布局</title>
+                  </head>
+                  <body>
+          
+                      <!-- 侧边栏 -->
+                      <div class="sidebar">
+                          <h2>样式表</h2>
+                          <a href="#">样式表 1</a>
+                          <a href="#">样式表 2</a>
+                          <a href="#">样式表 3</a>
+                          <a href="#">样式表 4</a>
+                          <a href="#">无样式表</a>
+                      </div>
+          
+                      <!-- 主内容 -->
+                      <div class="main-content">
+                          <h1>同一页面不同的样式表</h1>
+                          <p>
+                              这是不同样式表如何更改 HTML 页面的布局。您可以通过在菜单中选择不同的样式表来选择该页面的布局。
+                          </p>
+                          <h2>无样式</h2>
+                          <p>
+                              此页面使用 DIV 元素对 HTML 页面不同部分进行分组。单击此处查看没有样式表的页面外观：
+                          </p>
+                      </div>
+          
+                      <!-- 右侧边栏 -->
+                      <div class="right-sidebar">
+                          <h2>侧边栏</h2>
+                          <p>这里是右侧的内容区，你可以放一些额外的说明或链接。</p>
+                      </div>
+          
+                  </body>
+                  </html>
+                  </textarea>
+              </div>
+
+              <div  style="display:none;">
+                  <textarea id="css-code" placeholder="输入 CSS 代码">
+                  body {
+                      font-family: Arial, sans-serif;
+                      margin: 0;
+                      display: flex;
+                      background-color: #f4f4f4;
+                  }
+
+                  /* 侧边栏样式 */
+                  .sidebar {
+                      width: 250px;
+                      background-color: #00b4d8;
+                      color: white;
+                      padding: 20px;
+                      height: 100vh;
+                  }
+
+                  .sidebar a {
+                      color: white;
+                      text-decoration: none;
+                      display: block;
+                      margin-bottom: 10px;
+                  }
+
+                  .sidebar a:hover {
+                      background-color: #48c6ef;
+                      padding: 5px;
+                  }
+
+                  /* 主内容区域 */
+                  .main-content {
+                      flex-grow: 1;
+                      background-color: #ffffff;
+                      padding: 20px;
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                  }
+
+                  .main-content h1 {
+                      background-color: #00b4d8;
+                      color: white;
+                      padding: 10px;
+                      margin-top: 0;
+                  }
+
+                  .main-content p {
+                      font-size: 16px;
+                      line-height: 1.6;
+                  }
+
+                  /* 右侧边栏样式 */
+                  .right-sidebar {
+                      width: 300px;
+                      background-color: #e0f7fa;
+                      padding: 20px;
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                  }
+                  </textarea>
+              </div>
+
+              <div id="preview" style="border: 2px solid #000; height: 600px;"></div>
+        <h2>为什么学习css</h2>
+        <p>CSS 用于定义网页的样式，包括设计、布局 以及不同设备和屏幕尺寸的显示变化。学习CSS可以帮助你更好地设计网页，使其看起来更专业和吸引人。</p>
+        <h2>CSS解决了一个大问题</h2>
+        <p>在早期的网页设计中，HTML 负责网页的结构，而 CSS 负责网页的样式。这种分离使得网页设计更加灵活，易于维护和修改。</p>
+        <button class="button" style="vertical-align:middle"><span><a href="./css学习.html" target="_blank">现在开始</a> </span></button>
+        `;
+        updatePreview();
+          break;
+
+        case 'javascript':
+          middlePanel.innerHTML = '<h2>JavaScript 介绍</h2><p>JavaScript 是网页的编程语言...</p><button class="button" style="vertical-align:middle"><span><a href="./js学习.html" target="_blank">现在开始</a> </span></button>';
+          break;
+        case 'git':
+          middlePanel.innerHTML = '<h2>Git 介绍</h2><p>Git 是一个版本控制系统...</p>';
+          break;
+        case 'github':
+          middlePanel.innerHTML = '<h2>GitHub 介绍</h2><p>GitHub 是托管 Git 项目的平台...</p>';
+          break;
+        case 'npm':
+          middlePanel.innerHTML = '<h2>npm 介绍</h2><p>npm 是 JavaScript 的包管理工具...</p>';
+          break;
+        case 'react':
+          middlePanel.innerHTML = '<h2>React 介绍</h2><p>React 是构建用户界面的库...</p>';
+          break;
+        case 'tailwind':
+          middlePanel.innerHTML = '<h2>Tailwind 介绍</h2><p>Tailwind 是一个CSS框架...</p>';
+          break;
+        default:
+          middlePanel.innerHTML = '<h2>点击左侧的节点以查看详细信息</h2>';
+      }
+    }
+  </script>
+
+  <script>
+    let isGit = true; // 初始状态为 Git
+    function toggleGit() {
+      const middlePanel = document.getElementById('middle-panel');
+      if (isGit) {
+        middlePanel.innerHTML = '<h2>GitHub 介绍</h2><p>GitHub 是托管 Git 项目的平台...</p>';
+      } else {
+        middlePanel.innerHTML = '<h2>Git 介绍</h2><p>Git 是一个版本控制系统...</p>';
+      }
+      isGit = !isGit;
+    }
+  </script>
+
+  <!-- 引入 VStory -->
+  <script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>
+
+  <script>
+    // 注册所有内容
+    VStory.registerAll();
+
+    // 创建一个饼图的配置
+    const spec = {
+      type: 'pie',
+      data: [
+        {
+          id: 'id0',
+          values: [
+            { type: 'oxygen', value: 46.60 },
+            { type: 'silicon', value: 27.72 },
+            { type: 'aluminum', value: 8.13 },
+            { type: 'iron', value: 5 },
+            { type: 'calcium', value: 3.63 },
+            { type: 'sodium', value: 2.83 },
+            { type: 'potassium', value: 2.59 },
+            { type: 'others', value: 3.5 },
+          ],
+        },
+      ],
+      outerRadius: 0.8,
+      valueField: 'value',
+      categoryField: 'type',
+      title: {
+        visible: true,
+        text: '元素占比统计',
+      },
+      legends: {
+        visible: true,
+        orient: 'left',
+      },
+      label: {
+        visible: true,
+      },
+      tooltip: {
+        mark: {
+          content: [
+            {
+              key: (datum) => datum['type'],
+              value: (datum) => datum['value'] + '%',
+            },
+          ],
+        },
+      },
+    };
+
+    // 创建一个 DSL（剧情脚本）配置
+    const dsl = {
+      characters: [
+        {
+          type: 'VChart',
+          id: '0',
+          position: {
+            top: 50,
+            left: 50,
+            width: 400,
+            height: 300,
+          },
+          options: {
+            spec,
+            panel: {
+              fill: '#ffffff',
+              shadowColor: 'rgba(0, 0, 0, 0.05)',
+              shadowBlur: 10,
+              shadowOffsetX: 4,
+              shadowOffsetY: 4,
+              cornerRadius: 8,
+            },
+          },
+        },
+      ],
+      acts: [
+        {
+          id: 'default-chapter',
+          scenes: [
+            {
+              id: 'scene0',
+              actions: [
+                {
+                  characterId: '0',
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      payload: {
+                        animation: {
+                          duration: 6000, // 动画持续 3 秒
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    // 创建一个 VStory 实例
+    const story = new VStory.Story(dsl, { dom: 'chart', background: '#f9f9f9' });
+    const player = new VStory.Player(story);
+    story.init(player);
+
+    // 播放故事
+    player.play(0);
+  </script>
+</body>
+</html>
