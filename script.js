@@ -293,9 +293,9 @@ navItems.forEach((item) => {
                               '<h2 class="page-title-2">本章无练习，请继续学习🔜</h2>';
         break;
     case 'page7':
-        // let userScore = 0;
-        // let totalQuestions = 0;
-        // let answeredQuestions = new Set();
+        userScore = 0;
+        totalQuestions = 0;
+        answeredQuestions = new Set();
 
         questions = [
             {
