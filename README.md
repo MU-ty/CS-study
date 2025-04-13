@@ -1,2 +1,2 @@
 # -
-https://github.com/MU-ty/Mu-ty.github.io
+https://mu-ty.github.io/
