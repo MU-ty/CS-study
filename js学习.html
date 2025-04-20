@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
     <script src="https://unpkg.com/element-plus"></script>
     <script src="https://unpkg.com/vue-element-plus-x/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@visactor/vstory/dist/index.min.js"></script>
 </head>
-
 <body>
     <div id="nav">
         <ul>
@@ -56,11 +56,12 @@
           <div class="start page-content">利用20%的时间，掌握80%的内容</div>
           <div class="start page-content">Use 20% of the time, master 80% of the content</div>
           <h2 class="page-title">下面是JavaScript的流行程度</h2>
-          <div id="vstory-container"></div>
-          <script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>
+          <div id="vstory-container2"></div>
+
           <script>
-            const CONTAINER_ID = 'vstory-container';
-            VStory.registerAll();
+            
+            const CONTAINER_ID = 'vstory-container2';
+            // VStory.registerAll();
             async function loadDSL() {
             // 时间轴数据
             const timelineData = {
@@ -632,14 +633,21 @@
                 ]
             };
             }
+        
 
             document.addEventListener('DOMContentLoaded', async () => {
+                if (typeof VStory === 'undefined') {
+                    console.error('VStory library is not loaded!');
+                    return; // 如果未加载，则不继续执行
+                }
                 try {
+                    VStory.registerAll();
+
                     const dsl = await loadDSL();
                     console.log("DSL loaded:", dsl); // 调试
                     
                     const story = new VStory.Story(dsl, {
-                        dom: CONTAINER_ID,
+                        dom: 'vstory-container2',
                         width: 1100,
                         height: 600,
                         scaleX: 'auto',
