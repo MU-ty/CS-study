@@ -487,7 +487,8 @@ navItems.forEach((item) => {
         case 'page8':
             contentDiv.innerHTML = '<h1 class="page-title">第八章 类型</h1>'+
                               '<p class="start-content">JavaScript中的变量没有附加的任何类型。它们是<strong>无类型的</strong>。一旦将某种类型的值分配给变量，就可以稍后重新分配该变量以承载任何其他类型的值，而没有任何问题。</p>'+
-                              '<p class="start-content">在JavaScript中，我们有两种主要的类型：<strong>原始类型</strong>和<strong>对象类型</stronng>。</p>'
+                              '<p class="start-content">在JavaScript中，我们有两种主要的类型：<strong>原始类型</strong>和<strong>对象类型</stronng>。</p>'+
+                              '<p class'
     }
   });
 });
