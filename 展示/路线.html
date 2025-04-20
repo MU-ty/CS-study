@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算机学习之路</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Microsoft YaHei', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #4285f4;
+    }
+    
+    .vstory-timeline {
+      position: relative;
+      padding: 40px 0;
+    }
+    
+    .vstory-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background-color: #4285f4;
+      transform: translateX(-50%);
+    }
+    
+    .vstory-item {
+      position: relative;
+      margin-bottom: 60px;
+      width: 45%;
+    }
+    
+    .vstory-item:nth-child(odd) {
+      margin-left: auto;
+    }
+    
+    .vstory-item:before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #4285f4;
+      top: 20px;
+    }
+    
+    .vstory-item:nth-child(odd):before {
+      left: -60px;
+    }
+    
+    .vstory-item:nth-child(even):before {
+      right: -60px;
+    }
+    
+    .vstory-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .vstory-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .vstory-heading {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #4285f4;
+    }
+    
+    .vstory-description {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    
+    .vstory-tag {
+      display: inline-block;
+      background-color: #e8f0fe;
+      color: #4285f4;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    
+    .vstory-button {
+      display: inline-block;
+      background-color: #4285f4;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+    
+    .vstory-button:hover {
+      background-color: #3367d6;
+    }
+    
+    @media (max-width: 768px) {
+      .vstory-line {
+        left: 20px;
+      }
+      
+      .vstory-item {
+        width: 85%;
+        margin-left: auto;
+      }
+      
+      .vstory-item:before {
+        left: -40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>计算机学习之路</h1>
+    
+    <div class="vstory-timeline">
+      <div class="vstory-line"></div>
+      
+      <!-- 阶段1: 编程基础 -->
+      <div class="vstory-item">
+        <div class="vstory-content">
+          <h2 class="vstory-heading">阶段一：编程基础</h2>
+          <p class="vstory-description">掌握一门入门编程语言，建立编程思维和基础算法能力。推荐从Python或JavaScript开始，因为它们语法简单，应用广泛。</p>
+          <div>
+            <span class="vstory-tag">Python</span>
+            <span class="vstory-tag">JavaScript</span>
+            <span class="vstory-tag">基础算法</span>
+          </div>
+          <a href="#" class="vstory-button">开始学习</a>
+        </div>
+      </div>
+      
+      <!-- 阶段2: 数据结构与算法 -->
+      <div class="vstory-item">
+        <div class="vstory-content">
+          <h2 class="vstory-heading">阶段二：数据结构与算法</h2>
+          <p class="vstory-description">深入学习常见数据结构（数组、链表、栈、队列、树、图）和算法（排序、搜索、动态规划）。这是计算机科学的核心基础。</p>
+          <div>
+            <span class="vstory-tag">数据结构</span>
+            <span class="vstory-tag">算法分析</span>
+            <span class="vstory-tag">复杂度</span>
+          </div>
+          <a href="#" class="vstory-button">开始学习</a>
+        </div>
+      </div>
+      
+      <!-- 阶段3: 计算机网络 -->
+      <div class="vstory-item">
+        <div class="vstory-content">
+          <h2 class="vstory-heading">阶段三：计算机网络</h2>
+          <p class="vstory-description">了解网络协议（TCP/IP、HTTP/HTTPS）、网络安全基础、DNS工作原理以及网络架构。这些知识是开发网络应用的基础。</p>
+          <div>
+            <span class="vstory-tag">网络协议</span>
+            <span class="vstory-tag">TCP/IP</span>
+            <span class="vstory-tag">HTTP</span>
+          </div>
+          <a href="#" class="vstory-button">开始学习</a>
+        </div>
+      </div>
+      
+      <!-- 阶段4: 操作系统 -->
+      <div class="vstory-item">
+        <div class="vstory-content">
+          <h2 class="vstory-heading">阶段四：操作系统</h2>
+          <p class="vstory-description">学习操作系统的核心概念，包括进程管理、内存管理、文件系统和I/O管理。了解Linux基础命令和操作系统安全。</p>
+          <div>
+            <span class="vstory-tag">进程管理</span>
+            <span class="vstory-tag">内存管理</span>
+            <span class="vstory-tag">Linux基础</span>
+          </div>
+          <a href="#" class="vstory-button">开始学习</a>
+        </div>
+      </div>
+      
+      <!-- 阶段5: 数据库 -->
+      <div class="vstory-item">
+        <div class="vstory-content">
+          <h2 class="vstory-heading">阶段五：数据库</h2>
+          <p class="vstory-description">掌握关系型数据库（如MySQL）和非关系型数据库（如MongoDB）的基本概念、设计和操作。学习SQL语言和数据库优化。</p>
+          <div>
+            <span class="vstory-tag">SQL</span>
+            <span class="vstory-tag">MySQL</span>
+            <span class="vstory-tag">NoSQL</span>
+          </div>
+          <a href="#" class="vstory-button">开始学习</a>
+        </div>
+      </div>
+      
+      <!-- 阶段6: 软件工程 -->
+      <div class="vstory-item">
+        <div class="vstory-content">
+          <h2 class="vstory-heading">阶段六：软件工程</h2>
+          <p class="vstory-description">学习软件开发流程、软件架构设计、版本控制（如Git）、测试和持续集成。掌握团队协作和项目管理基础。</p>
+          <div>
+            <span class="vstory-tag">Git</span>
+            <span class="vstory-tag">软件测试</span>
+            <span class="vstory-tag">设计模式</span>
+          </div>
+          <a href="#" class="vstory-button">开始学习</a>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // 添加滚动动画效果
+      document.addEventListener('DOMContentLoaded', function() {
+        const items = document.querySelectorAll('.vstory-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        items.forEach(item => {
+          item.style.opacity = 0;
+          item.style.transform = 'translateY(20px)';
+          item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          observer.observe(item);
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>

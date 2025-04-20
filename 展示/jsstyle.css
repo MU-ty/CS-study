@@ -1,0 +1,245 @@
+body{
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+ul{
+    list-style-type: none;
+}
+#nav {
+    position: sticky;
+    top: 0;
+    float: left;
+    width: 200px;
+    height: 100vh;
+    overflow-y: auto;
+    background-image: linear-gradient(to right, #00b4d8, #c4e1ea);
+  }
+    #nav ul {
+        padding: 0;
+    }
+    #nav ul li {
+        border-bottom: 1px solid #000;
+        padding: 10px;
+        text-align: center;
+        background-image: linear-gradient(to right, #00b4d8, #c4e1ea);
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    #nav ul li:hover  {
+        background-image: linear-gradient(to right, #00677c, #6a9baa);
+    }
+  #content {
+    margin-left: 200px;
+  }
+.page-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.page-title-2{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+.content-title{
+    font-size: 20px;
+    font-weight: bold; 
+}
+.red{
+    color: red;
+    font-weight: bold;
+}
+.start{
+    text-align: center;
+}
+.page-content{
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+.tubiao{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    /* transform:scale(5.0); */
+    font-size: 100px;
+}
+
+#vstory-container2 {
+    width: 1100px;
+    height: 600px;
+    margin-left: 200px;
+  }
+
+.start-content{
+   margin-left: 30px; 
+}
+
+.care{
+    font-weight: bold;
+    list-style-type: square;
+}
+
+/* 练习 */
+.question-container {
+    background-color: #5886cf;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .question-mark {
+    font-size: 20px;
+    margin-left: 5px;
+    color: #ccc;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+
+  /* 聊天框样式 */
+#floating-chat-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999; /* 确保始终在最上层 */
+  }
+  
+  .chat-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: white;
+    font-size: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .chat-window {
+    width: 350px;
+    height: 490px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+  }
+  
+  .chat-header {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chat-content {
+    position: relative;
+    height: 400px;
+  }
+  
+  .chat-container {
+    padding: 10px;
+    padding-bottom: 70px;
+    white-space: normal !important;
+  }
+/*  */
+/* 头部按钮区域 */
+.header-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* 最小化和关闭按钮 */
+  .minimize-button, .close-button {
+    color: white !important;
+    padding: 3px !important;
+    margin-left: 8px;
+    border-radius: 50%;
+    height: 26px;
+    width: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .minimize-button:hover, .close-button:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+  }
+  
+  /* 最小化按钮图标 */
+  .minimize-button i {
+    margin-bottom: 5px;
+  }
+  
+  /* 关闭按钮特别样式 */
+  .close-button {
+    background-color: rgba(255,255,255,0.1);
+  }
+  
+  .close-button:hover {
+    background-color: rgba(255,0,0,0.3) !important;
+  }
+
+  /* 消息气泡内文本换行 */
+.chat-container .el-tag {
+    max-width: 80%;
+    white-space: normal !important; /* 允许文本换行 */
+    word-break: break-word; /* 允许在任何位置换行 */
+    text-align: left; /* 确保文本左对齐 */
+    line-height: 1.5;
+  }
+  
+  /* 修复右侧消息对齐问题 */
+  .chat-container > div[style*="right"] {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
+  /* 修复左侧消息对齐问题 */
+  .chat-container > div[style*="left"] {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  /* 输入区域样式 */
+.chat-input-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #eaeaea;
+    z-index: 1; /* 确保在消息上方 */
+  }
